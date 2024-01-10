@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ReMaze</title>
+  <link rel="icon" type="image/x-icon" href="./static/recycling-symbol.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="grid.css">
+  <link rel="preload" as="image" href="./static/avatars/bear.png">
+  <link rel="preload" as="image" href="./static/avatars/cat.png">
+  <link rel="preload" as="image" href="./static/avatars/chicken.png">
+  <link rel="preload" as="image" href="./static/avatars/deer.png">
+  <link rel="preload" as="image" href="./static/avatars/dog.png">
+  <link rel="preload" as="image" href="./static/avatars/giraffe.png">
+  <link rel="preload" as="image" href="./static/avatars/koala.png">
+  <link rel="preload" as="image" href="./static/avatars/lion.png">
+  <link rel="preload" as="image" href="./static/avatars/panda.png">
+  <link rel="preload" as="image" href="./static/avatars/puffer-fish.png">
+  <link rel="preload" as="image" href="./static/avatars/rabbit.png">
+  <link rel="preload" as="image" href="./static/avatars/sea-lion.png">
+  <link rel="preload" as="image" href="./static/composting.jpg">
+  <link rel="preload" as="image" href="./static/congratulations.jpg">
+  <link rel="preload" as="image" href="./static/disposable.jpg">
+  <link rel="preload" as="image" href="./static/globalwarming.jpg">
+  <link rel="preload" as="image" href="./static/greenhouse.jpg">
+  <link rel="preload" as="image" href="./static/landfill.jpg">
+  <link rel="preload" as="image" href="./static/pollution.jpg">
+  <link rel="preload" as="image" href="./static/recover.jpg">
+  <link rel="preload" as="image" href="./static/recycle.jpg">
+  <link rel="preload" as="image" href="./static/reduce.jpg">
+  <link rel="preload" as="image" href="./static/regenerate.jpg">
+  <link rel="preload" as="image" href="./static/reuse.jpg">
+  <link rel="preload" as="image" href="./static/sustainability.jpg">
+  <link rel="preload" as="image" href="./static/waste.jpg">
+
+</head>
+
+<body>
+  <style>
+    #preloadedImages {
+      width: 0px;
+      height: 0px;
+      display: inline;
+      background-image: url(./static/avatars/bear.png);
+      background-image: url(./static/avatars/cat.png);
+      background-image: url(./static/avatars/chicken.png);
+      background-image: url(./static/avatars/deer.png);
+      background-image: url(./static/avatars/dog.png);
+      background-image: url(./static/avatars/giraffe.png);
+      background-image: url(./static/avatars/koala.png);
+      background-image: url(./static/avatars/lion.png);
+      background-image: url(./static/avatars/panda.png);
+      background-image: url(./static/avatars/puffer-fish.png);
+      background-image: url(./static/avatars/rabbit.png);
+      background-image: url(./static/avatars/sea-lion.png);
+      background-image: url(./static/composting.jpg);
+      background-image: url(./static/congratulations.jpg);
+      background-image: url(./static/disposable.jpg);
+      background-image: url(./static/globalwarming.jpg);
+      background-image: url(./static/greenhouse.jpg);
+      background-image: url(./static/landfill.jpg);
+      background-image: url(./static/pollution.jpg);
+      background-image: url(./static/recover.jpg);
+      background-image: url(./static/recycle.jpg);
+      background-image: url(./static/reduce.jpg);
+      background-image: url(./static/regenerate.jpg);
+      background-image: url(./static/reuse.jpg);
+      background-image: url(./static/sustainability.jpg);
+      background-image: url(./static/waste.jpg);
+      background-image: url();
+
+    }
+  </style>
+  <div id="preloadedImages"></div>
+  <audio id="main-track" loop>
+    <source src="./static/main-track.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="move">
+    <source src="./static/move.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="reward">
+    <source src="./static/reward.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="win-track">
+    <source src="./static/win.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="pushtiles-track">
+    <source src="./static/pushtiles.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="close-track">
+    <source src="./static/close.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="rotate-track">
+    <source src="./static/rotatetile.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+  <div class="container container-main shadow rounded" id="main-container">
+    <div class="row">
+      <div class="col-lg-10 col-md-8 col-sm-6 col-6 col header">
+        <h1>ReMaze</h1>
+      </div>
+      <div class="col-lg-1 col-md-2 col-sm-3 col-3 header topbuttons restart">
+        <span></span>
+      </div>
+      <div class="col-lg-1 col-md-2 col-sm-3 col-3 col header topbuttons tutorial">
+        <span></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-12 col col-12">
+        <div id="board"></div>
+      </div>
+      <div class="col-lg-3 col-sm-12 col-md-3 extra-tile col-12">
+        <br>
+        <div class="row">
+          <div class="col col-lg-12 col-md-12 col-sm-3 col-3 rounded shadow" id="extra-tile-row">
+            <div class="row d-none d-sm-block">
+              <div class="col">
+                <p class="lead"><strong>Extra tile</strong></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+                <div id="extraTile"></div>
+              </div>
+              <div class="col col-lg-6 col-md-6 col-sm-12 col-12" id="turn-extra-tile-right">
+                <span class="btn btn-light shadow"></span>
+              </div>
+            </div>
+          </div>
+          <div class="col col-lg-6 col-md-12 col-sm-5 col-5">
+            <br>
+            <div class="row">
+              <div class="col">
+                <p id="point-tracker" class="lead"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p id="time-tracker" class="lead"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col col-lg-6 col-md-12 col-sm-4 col-4">
+            <div class="arrows-grid">
+              <div class="arrow-item"></div>
+              <div class="arrow-item">
+                <span id="arrow-up" class="arrow-key btn btn-light shadow"></span>
+              </div>
+              <div class="arrow-item"></div>
+              <div class="arrow-item">
+                <span id="arrow-left" class="arrow-key btn btn-light shadow"></span>
+              </div>
+              <div class="arrow-item"></div>
+              <div class="arrow-item">
+                <span id="arrow-right" class="arrow-key btn btn-light shadow"></span>
+              </div>
+              <div class="arrow-item"></div>
+              <div class="arrow-item">
+                <span id="arrow-down" class="arrow-key btn btn-light shadow"></span>
+              </div>
+              <div class="arrow-item"></div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <br>
+
+    </div>
+    <div id="win-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Congratulations!</h5>
+          </div>
+          <div class="modal-body">
+            <div class="concept-image"><img src="./static/congratulations.jpg"></div>
+            <p id="win-modal-message"></p>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="credits">Credits</button>
+            <button type="button" class="btn btn-maze" id="btn-play-again">Play again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="concept-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="concept-modal-title" class="modal-title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-concept-modal">
+              <span aria-hidden="true" class="no-click">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="concept-image" id="concept-modal-image"></div>
+            <p id="concept-modal-message"></p>
+            <p id="concept-modal-gamecase" class="font-italic"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="credits-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Credits</h5>
+          </div>
+          <div class="modal-body">
+            <p>Game developed by Fabian Maltempo</p>
+            <p><strong>Attributions</strong></p>
+            <a href="https://www.flaticon.com/free-icons/restart" title="restart icons">Restart icons created by B
+              Illustrations - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/board-game" title="board game icons">Board game icons created
+              by Freepik - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/tree" title="tree icons">Tree icons created by Freepik -
+              Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/recycling-symbol" title="Recycling symbol icons">Recycling
+              symbol icons created by AriqStock - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/rotate" title="rotate icons">Rotate icons created by Freepik -
+              Flaticon</a>
+            <a href="https://www.flaticon.es/iconos-gratis/flecha" title="flecha iconos">Flecha iconos creados por
+              Iconpro86 - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/question" title="question icons">Question icons created by
+              Freepik - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/next" title="next icons">Next icons created by Roundicons -
+              Flaticon</a>
+            <a href="http://www.freepik.com">Designed by Photoroyalty / Freepik</a>
+
+            <a
+              href="https://www.freepik.es/vector-gratis/varias-bolsas-botellas-ecologicas-reutilizables_9651014.htm#query=reducir&position=16&from_view=search&track=sph">Imagen
+              de pch.vector</a> en Freepik
+
+            <a
+              href="https://www.freepik.es/vector-gratis/reducir-icono-reutilizacion-reciclaje_3226477.htm#query=reuse&position=30&from_view=search&track=sph">Imagen
+              de rawpixel.com</a> en Freepik
+
+            Image by <a
+              href="https://www.freepik.com/free-photo/close-up-white-plastic-plate-fork-grass-park_5127475.htm#query=disposable&position=14&from_view=search&track=sph">Freepik</a>
+
+            <a
+              href="https://www.freepik.com/free-vector/garbage-truck-dumping-rubbish-cityscape-view_34978996.htm#query=landfill&position=12&from_view=search&track=sph">Image
+              by upklyak</a> on Freepik
+
+            <a
+              href="https://www.freepik.com/free-photo/environmental-conservation-garden-children_5219379.htm#query=regenerar&position=3&from_view=search&track=ais">Image
+              by jcomp</a> on Freepik
+
+            <a
+              href="https://www.freepik.com/free-vector/resilience-concept-illustration_37455933.htm#query=recover&position=11&from_view=search&track=sph">Image
+              by storyset</a> on Freepik
+
+            <a
+              href="https://www.freepik.com/free-vector/isolated-compost-composting-flat-composition-with-pile-with-earth-decomposed-waste-scraps-vector-illustration_39221990.htm#query=composting&position=8&from_view=search&track=sph">Image
+              by macrovector</a> on Freepik
+
+            <a
+              href="https://www.freepik.com/free-vector/global-warming-with-earth-fire_5840437.htm#query=global%20warming&position=7&from_view=search&track=ais">Image
+              by brgfx</a> on Freepik
+
+            Image by <a
+              href="https://www.freepik.com/free-vector/industry-hand-drawn-flat-co2-illustration_28207928.htm#query=greenhouse%20gases&position=8&from_view=search&track=ais">Freepik</a>
+            <a
+              href="https://www.freepik.com/free-vector/earth-pollution-concept-illustration_42106442.htm#query=greenhouse%20gases&position=7&from_view=search&track=ais">Image
+              by storyset</a> on Freepik
+
+            <a
+              href="https://www.freepik.com/free-vector/water-pollution-with-plastic-bags-river_5768045.htm#query=pollution&position=6&from_view=search&track=sph">Image
+              by brgfx</a> on Freepik
+
+            <a
+              href="https://www.freepik.com/free-vector/wind-energy-concept-illustration_38687012.htm#query=sustainability&position=18&from_view=search&track=sph">Image
+              by storyset</a> on Freepik
+
+            Image by <a
+              href="https://www.freepik.com/free-vector/save-planet-concept-with-people-taking-care-earth_7824979.htm#query=sustainability&position=2&from_view=search&track=sph">Freepik</a>
+
+            <a href="https://www.flaticon.com/free-icons/animals" title="animals icons">Animals icons created by Freepik
+              - Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/animal" title="animal icons">Animal icons created by Freepik -
+              Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/panda" title="panda icons">Panda icons created by Freepik -
+              Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/animals" title="animals icons">Animals icons created by Freepik
+              - Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/animal" title="animal icons">Animal icons created by Freepik -
+              Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/animals" title="animals icons">Animals icons created by Freepik
+              - Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/animal" title="animal icons">Animal icons created by Freepik -
+              Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/koala" title="koala icons">Koala icons created by Freepik -
+              Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/animals" title="animals icons">Animals icons created by Freepik
+              - Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/animal" title="animal icons">Animal icons created by Freepik -
+              Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/puffer-fish" title="puffer fish icons">Puffer fish icons
+              created by Freepik - Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/animal" title="animal icons">Animal icons created by Freepik -
+              Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/animal" title="animal icons">Animal icons created by Freepik -
+              Flaticon</a>
+
+            <a href="https://www.flaticon.com/free-icons/lion" title="lion icons">Lion icons created by Freepik -
+              Flaticon</a>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="credits-back">Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="tutorial-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="tutorial-modal-title" class="modal-title">How to play</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-tutorial-modal">
+              <span aria-hidden="true" class="no-click">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col col-2 col-sm-2 pawn-tutorial tutorial-image"><span></span></div>
+              <div class="col col-10 col-sm-10 tutorial-text">
+                <p>This is your character. You have to get it out of the maze.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-2 col-sm-2 goal-tutorial tutorial-image"><span></span></div>
+              <div class="col col-10 col-sm-10 tutorial-text">
+                <p>This is where you have to get your character in order to win the game.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-2 col-sm-2 move-tutorial tutorial-image"><span></span></div>
+              <div class="col col-10 col-sm-10 tutorial-text">
+                <p>With the arrow keys, you can move the character around.</p>
+              </div>
+            </div>
+            <div class="row" id="push-tiles-button">
+              <div class="col col-2 col-sm-2 push-tutorial tutorial-image"><span></span></div>
+              <div class="col col-10 col-sm-10 tutorial-text">
+                <p>With these buttons, you can push the row/column in the direction indicated. <a href="#"
+                    class="link-primary">Click here to see an example.</a></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-2 col-sm-2 rotate-tutorial tutorial-image"><span></span></div>
+              <div class="col col-10 col-sm-10 tutorial-text">
+                <p>By clicking on this button, you can rotate the extra tile before placing it on the board by pushing a
+                  row/column.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-2 col-sm-2 seeds-tutorial tutorial-image"><span></span></div>
+              <div class="col col-10 col-sm-10 tutorial-text">
+                <p>By going through the seeds in the board, you will plant trees and learn important concepts.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="push-tiles-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="push-tiles-modal-title" class="modal-title">Push tiles example</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-push-tiles-modal">
+              <span aria-hidden="true" class="no-click">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="push-tiles-body">
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="welcome-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="welcome-modal-title" class="modal-title">Welcome to ReMaze!</h5>
+          </div>
+          <div class="modal-body">
+            <p>You have to get your character out of the maze in order to win. But this is no regular maze! It is made
+              of
+              tiles, which you will have to change by pushing the rows and columns to create the way out.</p>
+            <p>Press on <strong>Choose Character</strong> to select an avatar and start playing.
+              You can press on the <strong>question mark (?)</strong> icon on the top right on any moment to see
+              the rules.</p>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-maze" id="btn-start">Choose Character</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="avatar-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="avatar-modal-title" class="modal-title">Choose your character</h5>
+
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-lion" id="avatar-lion"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-dog" id="avatar-dog"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-cat" id="avatar-cat"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-bear" id="avatar-bear"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-chicken" id="avatar-chicken"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-deer" id="avatar-deer"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-giraffe" id="avatar-giraffe"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-koala" id="avatar-koala"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-panda" id="avatar-panda"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-puffer-fish" id="avatar-puffer-fish"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-rabbit" id="avatar-rabbit"><span></span></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col col-4">
+                  <div class="avatar-icon avatar-sea-lion" id="avatar-sea-lion"><span></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="bundle.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

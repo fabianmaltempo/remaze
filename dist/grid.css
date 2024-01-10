@@ -1,0 +1,416 @@
+:root {
+  --avatar-path: url(./static/pawn.png);
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden
+}
+
+.extra-tile {
+  background-color: bisque;
+}
+
+.header {
+  background-color: bisque;
+}
+
+.grid-container {
+  aspect-ratio: 1/ 1;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-auto-flow: row dense;
+  max-height: 90vh;
+}
+
+.arrows-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 35px);
+  aspect-ratio: 1/1;
+  height: 105px;
+}
+
+.arrow-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  aspect-ratio: 1/1;
+  width: 35px;
+  height: 35px;
+}
+
+.tile-grid {
+  aspect-ratio: 1/ 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 2%;
+  background-color: darkgoldenrod;
+}
+
+.grid-item {
+  aspect-ratio: 1/ 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.walkable {
+  background-color: lightgoldenrodyellow;
+  width: 100%;
+  height: 100%;
+}
+
+.outTile {
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2%;
+}
+/*
+.outTile>span{
+  background-image: repeating-linear-gradient(36deg, rgba(255, 253, 253, 0.1), rgba(255,255,255, 0.1) 8px, transparent 0px, transparent 16px);
+  aspect-ratio: 1/ 1;
+  height: 100%;
+  width: 100%;
+  object-fit:scale-down;
+}
+*/
+.conceptExplored>span {
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+  content: url(./static/tree.png)
+}
+
+.hasConcept>span {
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+  content: url(./static/recycling-symbol.png)
+}
+
+.occupied>span {
+  content: var(--avatar-path);
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+}
+
+#turn-extra-tile-left>span {
+  
+  content: url(./static/turn-tile.png);
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+  object-fit:scale-down;
+}
+
+#turn-extra-tile-right>span {
+  transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  /*  for IE  */
+
+  /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+  -webkit-transform: scaleX(-1);
+  content: url(./static/turn-tile.png);
+  aspect-ratio: 1/ 1;
+  height: 100%;
+  width: 100%;
+  object-fit:scale-down;
+}
+
+.container-main {
+  background-color: antiquewhite;
+}
+
+.push-tiles.tilerow0>span {
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  /*  for IE  */
+
+  /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+  -webkit-transform: rotate(90deg);
+  content: url(./static/push-line.png);
+  aspect-ratio: 1/ 1;
+  height: 100%;
+  width: 100%;
+  object-fit:scale-down;
+}
+
+.push-tiles.tilerow8>span {
+  transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  /*  for IE  */
+
+  /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+  -webkit-transform: rotate(-90deg);
+  content: url(./static/push-line.png);
+  aspect-ratio: 1/ 1;
+  height: 100%;
+  width: 100%;
+  object-fit:scale-down;
+}
+
+.push-tiles.tilecol8>span {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  /*  for IE  */
+
+  /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+  -webkit-transform: rotate(180deg);
+  content: url(./static/push-line.png);
+  aspect-ratio: 1/ 1;
+  height: 100%;
+  width: 100%;
+  object-fit:scale-down;
+}
+.push-tiles.tilecol0>span {
+
+  content: url(./static/push-line.png);
+  aspect-ratio: 1/ 1;
+  height: 100%;
+  width: 100%;
+  object-fit:scale-down;
+}
+
+.push-tiles>span:active {
+  pointer-events: none;
+}
+
+.move-vertical {
+  grid-column: auto / span 2;
+  grid-row: auto / span 2;
+}
+
+.goal>span {
+
+  content: url(./static/board.png) !important;
+  background-color: white;
+  aspect-ratio: 1/ 1;
+  height: 100%;
+  width: 100%;
+}
+
+#arrow-up {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  /*  for IE  */
+
+  /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+  -webkit-transform: rotate(180deg);
+  aspect-ratio: 1/1;
+  max-width: 35px;
+  content: url(./static/key-arrow.png);
+  object-fit:scale-down;
+}
+
+#arrow-down {
+  aspect-ratio: 1/1;
+  max-width: 35px;
+  content: url(./static/key-arrow.png);
+  object-fit:scale-down;
+}
+
+#arrow-left {
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  /*  for IE  */
+
+  /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+  -webkit-transform: rotate(90deg);
+  aspect-ratio: 1/1;
+  max-width: 35px;
+  content: url(./static/key-arrow.png);
+  object-fit:scale-down;
+}
+
+#arrow-right {
+  transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  /*  for IE  */
+
+  /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+  -webkit-transform: rotate(-90deg);
+  aspect-ratio: 1/1;
+  max-width: 35px;
+  content: url(./static/key-arrow.png);
+  object-fit:scale-down;
+}
+
+.no-click:active {
+  pointer-events: none;
+}
+
+.btn-maze {
+  background-color: darkgoldenrod;
+  border-color: darkgoldenrod;
+  color: white;
+}
+
+.btn-maze:hover{
+  color:white;
+}
+
+#extra-tile-row{
+  background-color: lightgray;
+  padding: 3%
+}
+
+.topbuttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.restart>span{
+  aspect-ratio: 1/1;
+  content: url(./static/restart.png);
+  object-fit:scale-down;
+  height: 90%;
+  width: 90%;
+  max-height: 30px;
+}
+
+.tutorial>span{
+  aspect-ratio: 1/1;
+  content: url(./static/question.png);
+  object-fit:scale-down;
+  height: 90%;
+  width: 90%;
+  max-height: 30px;
+}
+
+#push-tiles-body>span{
+  content: url(./static/pushtilegif.gif);
+  object-fit:scale-down;
+  height: 90%;
+  width: 90%;
+}
+
+.pawn-tutorial>span{
+  content: var(--avatar-path);
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+  object-fit:scale-down;
+}
+.goal-tutorial>span{
+  content: url(./static/board.png);
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+  object-fit:scale-down;
+}
+.move-tutorial>span{
+  content: url(./static/move.png);
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+  object-fit:scale-down;
+}
+.push-tutorial>span{
+  content: url(./static/push-line.png);
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+  object-fit:scale-down;
+}
+.rotate-tutorial>span{
+  content: url(./static/turn-tile.png);
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+  object-fit:scale-down;
+}
+.seeds-tutorial>span{
+  content: url(./static/recycling-symbol.png);
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+  object-fit:scale-down;
+}
+
+
+.tutorial-image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tutorial-text{
+  display: flex;
+  align-items: center;
+}
+
+#push-tiles-body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit:scale-down;
+}
+
+.concept-image{
+  object-fit: contain;
+}
+
+.concept-image>img{
+  width: 100%;
+}
+
+.avatar-icon>span{
+  aspect-ratio: 1/ 1;
+  height: 90%;
+  width: 90%;
+  object-fit:scale-down;
+  pointer-events: none;
+}
+
+.avatar-lion>span{
+  content: url(./static/avatars/lion.png);
+}
+
+.avatar-cat>span{
+  content: url(./static/avatars/cat.png);
+}
+
+.avatar-dog>span{
+  content: url(./static/avatars/dog.png);
+}
+.avatar-bear>span{
+  content: url(./static/avatars/bear.png);
+}
+
+.avatar-chicken>span{
+  content: url(./static/avatars/chicken.png);
+}
+
+.avatar-deer>span{
+  content: url(./static/avatars/deer.png);
+}
+.avatar-giraffe>span{
+  content: url(./static/avatars/giraffe.png);
+}
+
+.avatar-koala>span{
+  content: url(./static/avatars/koala.png);
+}
+
+.avatar-panda>span{
+  content: url(./static/avatars/panda.png);
+}
+.avatar-puffer-fish>span{
+  content: url(./static/avatars/puffer-fish.png);
+}
+
+.avatar-rabbit>span{
+  content: url(./static/avatars/rabbit.png);
+}
+
+.avatar-sea-lion>span{
+  content: url(./static/avatars/sea-lion.png);
+}

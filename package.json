@@ -1,0 +1,27 @@
+{
+  "name": "reusablemaze",
+  "version": "0.0.1",
+  "description": "reusable maze for tcs gamethon",
+  "main": "/TS/index.ts",
+  "scripts": {
+    "develop": "webpack-dev-server --mode development",
+    "build": "webpack --mode production"
+  },
+  "keywords": [
+    "maze",
+    "game",
+    "logic",
+    "puzzle",
+    "recycle",
+    "reuse",
+    "reduce"
+  ],
+  "author": "fabianmaltempo",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^9.4.4",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
